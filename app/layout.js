@@ -25,10 +25,6 @@ export const metadata = {
     "جنات أشرف",
     "موقع شخصي للمبرمجة",
   ],
-  verification: {
-    google:
-      "google-site-verification=nJl1KIlcWvnelYjyN2C_-RQu6MMPQbT7e5ubWrjd8dM",
-  },
 };
 
 export default function RootLayout({ children }) {
