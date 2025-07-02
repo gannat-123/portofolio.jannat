@@ -2,53 +2,46 @@
 
 import { useEffect, useState } from "react";
 
-const GoogleSheetData = () => {
+const GoogleSheetPage = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     fetch(
-      "https://docs.google.com/spreadsheets/d/16Bdn3c-xP11KuXT9r3-9DJDmd6d6uxZMBWxR-7E0GBE/edit?gid=0#gid=0"
+      "https://docs.google.com/spreadsheets/d/e/2PACX-1vRc2NxBeDQq4P66p1Suw340mL89XNA-3qHXCP8wY0OiJ5VkxKXCL8iiYDFlYYvBadmhCFKajdWOC2Or/pub?output=tsv"
     )
       .then((res) => res.text())
       .then((text) => {
-        const rows = text
-          .trim()
-          .split("\n")
-          .map((row) => row.split("\t"));
-        const headers = rows[0];
-        const items = rows.slice(1).map((row) => {
-          const obj = {};
-          headers.forEach((header, i) => {
-            obj[header] = row[i];
-          });
-          return obj;
-        });
-        setData(items);
+        const rows = text.trim().split("\n");
+        const parsedData = rows.map((row) => row.split("\t"));
+        setData(parsedData);
+      })
+      .catch((err) => {
+        console.error("Error fetching Google Sheet:", err);
       });
   }, []);
 
   return (
-    <div className="p-4">
-      <h2 className="text-xl font-bold mb-4">البيانات من Google Sheet:</h2>
-      <ul className="space-y-2">
-        {data.map((item, idx) => (
-          <li key={idx} className="border p-2 rounded shadow">
-            <strong>{item.name}</strong>
-            <br />
-            {item.description}
-            <br />
-            <a
-              href={item.link}
-              className="text-blue-500 underline"
-              target="_blank"
-            >
-              رابط
-            </a>
-          </li>
-        ))}
-      </ul>
+    <div style={{ padding: "20px" }}>
+      <h1
+       
+      
+        style={{ fontWeight: "bold", fontSize: "24px", marginBottom: "10px" }}
+      >
+        بيانات من Google Sheet
+      </h1>
+      <table border="1" cellPadding="8" cellSpacing="0">
+        <tbody>
+          {data.map((row, rowIndex) => (
+            <tr key={rowIndex}>
+              {row.map((cell, cellIdx) => (
+                <td key={cellIdx}>{cell}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
 
-export default GoogleSheetData;
+export default GoogleSheetPage;
