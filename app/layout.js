@@ -12,8 +12,7 @@ const geistMono = Geist_Mono({
 });
 export const metadata = {
   title: "Jannat Ashraf | Frontend Developer | المبرمجة جنات",
-  Content:
-    "google-site-verification=nJl1KIlcWvnelYjyN2C_-RQu6MMPQbT7e5ubWrjd8dM",
+
   description:
     "Welcome to the official portfolio of Jannat Ashraf – a creative frontend developer. Here you’ll find my latest projects, CV, contact information, and more. البشمهندسة جنات – مطورة واجهات أمامية مبدعة.",
   keywords: [
@@ -25,6 +24,9 @@ export const metadata = {
     "جنات أشرف",
     "موقع شخصي للمبرمجة",
   ],
+  verification: {
+    google: "nJl1KIlcWvnelYjyN2C_-RQu6MMPQbT7e5ubWrjd8dM",
+  },
 };
 
 export default function RootLayout({ children }) {
