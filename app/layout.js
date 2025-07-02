@@ -25,7 +25,7 @@ export const metadata = {
     "موقع شخصي للمبرمجة",
   ],
   verification: {
-    google: "nJl1KIlcWvnelYjyN2C_-RQu6MMPQbT7e5ubWrjd8dM",
+    google: "nJl1KIlcWvnelYjyN2C_-RQu6MMPQ",
   },
 };
 
