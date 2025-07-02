@@ -2,46 +2,49 @@
 
 import { useEffect, useState } from "react";
 
-const GoogleSheetPage = () => {
+export default function SheetPage() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     fetch(
-      "https://docs.google.com/spreadsheets/d/e/2PACX-1vRc2NxBeDQq4P66p1Suw340mL89XNA-3qHXCP8wY0OiJ5VkxKXCL8iiYDFlYYvBadmhCFKajdWOC2Or/pub?output=tsv"
+      "https://docs.google.com/spreadsheets/d/16Bdn3c-xP11KuXT9r3-9DJDmd6d6uxZMBWxR-7E0GBE/edit?gid=0#gid=0"
     )
       .then((res) => res.text())
       .then((text) => {
         const rows = text.trim().split("\n");
-        const parsedData = rows.map((row) => row.split("\t"));
-        setData(parsedData);
+        const parsed = rows.map((row) => row.split("\t"));
+        setData(parsed);
       })
-      .catch((err) => {
-        console.error("Error fetching Google Sheet:", err);
+      .catch((error) => {
+        console.error("خطأ أثناء تحميل الشيت:", error);
       });
   }, []);
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h1
-       
-      
-        style={{ fontWeight: "bold", fontSize: "24px", marginBottom: "10px" }}
-      >
+    <main style={{ padding: "20px" }}>
+      <h1 style={{ fontWeight: "bold", fontSize: "24px" }}>
         بيانات من Google Sheet
       </h1>
-      <table border="1" cellPadding="8" cellSpacing="0">
-        <tbody>
-          {data.map((row, rowIndex) => (
-            <tr key={rowIndex}>
-              {row.map((cell, cellIdx) => (
-                <td key={cellIdx}>{cell}</td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+      {data.length === 0 ? (
+        <p>جاري التحميل...</p>
+      ) : (
+        <table
+          border="1"
+          cellPadding="8"
+          cellSpacing="0"
+          style={{ marginTop: "20px" }}
+        >
+          <tbody>
+            {data.map((row, i) => (
+              <tr key={i}>
+                {row.map((cell, j) => (
+                  <td key={j}>{cell}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+    </main>
   );
-};
-
-export default GoogleSheetPage;
+}
