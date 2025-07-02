@@ -23,6 +23,9 @@ export const metadata = {
     "جنات أشرف",
     "موقع شخصي للمبرمجة",
   ],
+  verification: {
+    google: "nJl1KIlcWvnelYjyN2C_-RQu6MMPQbT7e5ubWrjd8dM",
+  },
 };
 
 export default function RootLayout({ children }) {
